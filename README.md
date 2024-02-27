@@ -8,3 +8,5 @@ Uploaded style for html files in css
 Uploaded png of user login look
 
 Created tables for product analysis in database
+
+Created and uploaded user home page
