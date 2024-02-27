@@ -1,7 +1,6 @@
 -- Create a database for product rating sentiment analysis
 CREATE DATABASE IF NOT EXISTS product_rating_analysis;
 
-
 -- Create a table to store users
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
