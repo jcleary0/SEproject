@@ -18,3 +18,7 @@ Finsihed Admin Login back end.
 
 Finished Admin homepage back end.
   Includes, adding, deleting, and modifying a product.
+
+Updated userHomepage.html
+
+Created and uploaded search_results.php
