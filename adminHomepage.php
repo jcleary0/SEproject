@@ -11,12 +11,12 @@
 <?php
     session_start();
     if (!isset($_SESSION['username'])) {
-        // Redirect to login if session variables are not set
+        // Back to login if variables aren't set
         header("Location: adminLogin.php");
         exit();
     }
 
-    // Retrieve username and password from session
+    // Retrieve username and password
     $username = $_SESSION['username'];
     $password = $_SESSION['password'];
 
@@ -24,7 +24,7 @@
     $query = "SELECT * FROM products";
     $result = mysqli_query($sql, $query);
 
-    // Check if query executed successfully
+    // Check if query executed
     if (!$result) {
         echo "Error: " . mysqli_error($sql);
     } else {
@@ -38,7 +38,7 @@
             echo "<p> Product ID: $id</p>";
             echo "<p> Product Description: $description</p>";
             
-            // Allows admin to change product info, connected to update_product.php
+            // Update product button for admin, connected to update_product.php
             echo "<form method='post' action='update_product.php'>";
             echo "<input type='hidden' name='id' value='$id' />";
             echo "<input type='text' name='name' value='$name' />";
@@ -46,18 +46,17 @@
             echo "<input type='submit' value='Update Product' />";
             echo "</form>";
             
-            // Delete item button for admin use, connected to delete_product.php
+            // Delete product button for admin, connected to delete_product.php
             echo "<form method='post' action='delete_product.php'>";
             echo "<input type='hidden' name='id' value='$id' />";
             echo "<input type='submit' value='Delete Product' />";
             echo "</form>";
-            
             echo "</p>";
         }
     }
 ?>
 
-<!-- Add item, which goes to add_product.php -->
+// Add product button for admin, connected to add_product.php
 <h2>Add Product</h2>
 <form method="post" action="add_product.php">
   <label for="id">Product ID:</label>
@@ -68,6 +67,5 @@
   <input type="text" id="description" name="description" required><br>
   <input type="submit" value="Add Product">
 </form>
-
 </body>
 </html>
