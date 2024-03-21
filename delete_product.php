@@ -2,22 +2,22 @@
 include('include/project_config.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
+    // Retrieve deleted product data
     $id = $_POST['id'];
 
-    // Prepare SQL query
+    // SQL query
     $query = "DELETE FROM products WHERE id = ?";
     $stmt = $sql->prepare($query);
 
     if (!$stmt) {
-        echo "Error preparing statement: " . $sql->error;
+        echo "Error: " . $sql->error;
     }
 
     $stmt->bind_param("i", $id);
 
-    // Perform the SQL delete query
+    // SQL delete query
     if ($stmt->execute()) {
-        // Item deleted
+        // Product deleted
         echo "Product has been removed successfully.";
     } else {
         // Error occurred, product not deleted
