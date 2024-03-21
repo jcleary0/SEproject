@@ -1,11 +1,10 @@
 <?php
-// Include project configuration file
 include('include/project_config.php');
 
-// Check if form is submitted
+// Check if search is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get search term from form submission
-    $searchterm = $_POST['searchterm'];
+    $search = $_POST['search'];
 
     // Prepare SQL statement
     $stmt = $sql->prepare("SELECT id, name, description FROM products WHERE id LIKE ? OR name LIKE ? OR description LIKE ?");
@@ -13,11 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if statement was prepared successfully
     if ($stmt) {
         // Bind parameters and execute query
-        $searchterm = "%" . $searchterm . "%";
-        $stmt->bind_param("sss", $searchterm, $searchterm, $searchterm);
+        $search = "%" . $search . "%";
+        $stmt->bind_param("sss", $search, $search, $search);
         $stmt->execute();
 
-        // Get result set
+        // Get result
         $result = $stmt->get_result();
 
         // Display search results
@@ -33,15 +32,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "<p>No results found.</p>";
         }
-
-        // Close result set
         $result->free();
-
-        // Close statement
         $stmt->close();
     } else {
-        // Handle statement preparation error
-        echo "Error: Unable to prepare SQL statement.";
+        echo "Error";
     }
 }
 ?>
