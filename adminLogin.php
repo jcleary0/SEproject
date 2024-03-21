@@ -1,12 +1,10 @@
 <?php
 session_start();
-
-// Include the database configuration
 include('include/project_config.php');
 
-// Check if the form is submitted
+// Check if the login is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
+    // Retrieve login data
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -17,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
     $result = $stmt->get_result();
     
-    // Check if a row is returned (i.e., if the login is successful)
+    // Check if login is successful
     if ($result->num_rows == 1) {
         // Set session variables
         $_SESSION['username'] = $username;
