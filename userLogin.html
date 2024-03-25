@@ -1,39 +1,87 @@
-<!--Product Ranking Website Index File-->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Ranking - Home</title>
     <link rel="stylesheet" href="styles.css"> <!-- Link to CSS file used for more specific design -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .space {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
         <h2>Welcome to Product Ranking</h2>
-
-        <!-- image or logo above the login form -->
         <img src="img/mockup.jpg" alt="Logo" class="logo">
-
-         <!-- adding space between image and login -->
-         <div class="space"></div>
-
-        <!-- login form -->
+        <div class="space"></div>
         <form action="login.php" method="post">
             <label for="username">Username:</label>
             <input type="text" name="username" required><br>
-            
             <label for="password">Password:</label>
             <input type="password" name="password" required><br>
-            
             <input type="submit" value="Login">
             <a href="forgot_password.php">Forgot Password?</a>
         </form>
-
-        <!-- signup link -->
         <p>Don't have an account? <a href="signup.php">Sign up!</a></p>
-
-	<!-- admin link -->
         <p>Need admin login? <a href="adminLogin.html">Click here!</a></p>
     </div>
 </body>
