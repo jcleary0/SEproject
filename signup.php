@@ -1,15 +1,6 @@
 <?php
-// Database connection
-$servername = "localhost";
-$username = "product";
-$password = "analysis";
-$dbname = "ProductAnalysis.SQL";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+session_start();
+include('include/project_config.php');
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -30,7 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Insert the new user into the database
         $sql_insert = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$hashed_password')";
         if ($conn->query($sql_insert) === TRUE) {
-            echo "You have successfully signed up!";
+            // Set session variables
+            $_SESSION["username"] = $username;
+            // Redirect to the home page
+            header("Location: userHomepage.html");
+            exit;
         } else {
             echo "Error: " . $sql_insert . "<br>" . $conn->error;
         }
