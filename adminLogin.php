@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	<h2>Admin Login</h2>
 
         <!-- image or logo above the login form -->
-        <img src="img/mockup.jpg" alt="Logo" class="logo">
+        <img src="logo.png" alt="Logo" class="logo">
 
          <!-- adding space between image and login -->
          <div class="space"></div>
