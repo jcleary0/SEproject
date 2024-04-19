@@ -1,36 +1,65 @@
 <?php
-session_start();
-include('include/project_config.php');
-
-// Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+require'product_config.php';
+if(!empty($_SESSION["id"])){
+    header("Location: index.php");
+}
+if(isset($_POST["submit"])){
+    $name = $_POST["name"];
     $username = $_POST["username"];
     $email = $_POST["email"];
     $password = $_POST["password"];
-    
-    // Check if username or email already exists in the database
-    $sql_check = "SELECT * FROM users WHERE username = '$username' OR email = '$email'";
-    $result_check = $conn->query($sql_check);
-
-    if ($result_check->num_rows > 0) {
-        echo "Username or email already exists. Please choose a different one.";
-    } else {
-        // Hash the password before storing it in the database
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        
-        // Insert the new user into the database
-        $sql_insert = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$hashed_password')";
-        if ($conn->query($sql_insert) === TRUE) {
-            // Set session variables
-            $_SESSION["username"] = $username;
-            // Redirect to the home page
-            header("Location: userHomepage.html");
-            exit;
-        } else {
-            echo "Error: " . $sql_insert . "<br>" . $conn->error;
+    $confirmpassword = $_POST["confirmpassword"];
+    $duplicate = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' OR email = '$email'");
+    if (!$duplicate) {
+        die('Error: ' . mysqli_error($conn)); // Handle database query error
+    }
+    if(mysqli_num_rows($duplicate) > 0){
+        echo
+        "<script> alert('Username or Email is already taken'); </script>";
+    }
+    else{
+        if($password == $confirmpassword){
+            // Hash the password before storing it in the database
+            $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
+            $query = "INSERT INTO users (name, username, password, email) VALUES('$name', '$username', '$hashedpassword', '$email')";
+            $result = mysqli_query($conn,$query);
+        mysqli_query($conn, $query);
+            if (!$result) {
+                die('Error: ' . mysqli_error($conn)); // Handle database query error
+            }
+            echo
+        "<script> alert('Registration Sucessful'); </script>";
+        }
+        else{
+            echo
+        "<script> alert('Password does not match'); </script>";
         }
     }
 }
-
-$conn->close();
 ?>
+
+<!DOCTYPE hmtl>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Sign Up</title>
+</head>
+<body>
+    <h2>Sign Up</h2>
+    <form class="" action="" method= "post" autocomplete="off">
+        <label for="name">Name : </label>
+        <input type="text" name="name" id= "name" required value=""> <br>
+        <label for="username">Username : </label>
+        <input type="text" name="username" id= "username" required value=""> <br>
+        <label for="email">Email : </label>
+        <input type="email" name="email" id= "email" required value=""> <br>
+        <label for="password">Password : </label>
+        <input type="password" name="password" id= "password" required value=""> <br>
+        <label for="confirmpassword">Confirm Password : </label>
+        <input type="password" name="confirmpassword" id= "confirmpassword" required value=""> <br>
+        <button type="submit" name="submit">SignUp</button>
+</form>
+<br>
+<a href="userLogin.php">Login</a>
+</body>
+<html>
