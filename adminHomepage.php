@@ -33,16 +33,19 @@
             $id = $row['id'];
             $name = $row['name'];
             $description = $row['description'];
+            $category = $row['category'];
             
             echo "<h1>Product Name: $name</h1>";
-            echo "<p> Product ID: $id</p>";
+	    echo "<p> Product ID: $id</p>";
             echo "<p> Product Description: $description</p>";
+            echo "<p> Product Category: $category</p>";
             
             // Allows admin to change product info, connected to update_product.php
             echo "<form method='post' action='update_product.php'>";
             echo "<input type='hidden' name='id' value='$id' />";
             echo "<input type='text' name='name' value='$name' />";
             echo "<input type='text' name='description' value='$description' />";
+            echo "<input type='text' name='category' value='$category' />";
             echo "<input type='submit' value='Update Product' />";
             echo "</form>";
             
@@ -57,13 +60,20 @@
     }
 ?>
 
-<!-- Add item for admin use, which goes to add_product.php -->
+<!-- Add item, which goes to add_product.php -->
 <h2>Add Product</h2>
 <form method="post" action="add_product.php">
   <label for="name">Product Name:</label>
   <input type="varchar" id="name" name="name" required><br>
   <label for="description">Product Description:</label>
   <input type="text" id="description" name="description" required><br>
+  <label for="category">Product Category:</label>
+  <select name="category" required>
+    <option value="Accessories">Accessories</option>
+    <option value="Appliances">Appliances</option>
+    <option value="Electronics">Electronics</option>
+    <option value="Home Decor">Home Decor</option>
+  </select><br>
   <input type="submit" value="Add Product">
 </form>
 
