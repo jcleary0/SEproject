@@ -19,10 +19,9 @@
             height: 100vh;
             text-align: center; /* Center align all text */
         }
-
+        
         .container {
             width: 60%;
-            height: 80vh;
             padding: 20px;
             background: linear-gradient(135deg, #d1cdcd, #ada8a2);
             border-radius: 8px;
@@ -33,7 +32,7 @@
             justify-content: center;
             align-items: center;
         }
-
+    
         h2 {
             color: #333;
             font-size: 24px;
